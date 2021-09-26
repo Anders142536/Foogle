@@ -1,0 +1,13 @@
+{
+  "name": "Foogle",
+  "version": "0.0.1",
+  "title": "Foogle",
+  "author": "Anders142536",
+  "description": "Find out where exactly in your base iron plates are leaking into the logistics network.\n\nSimilar to BeastFinder, but easier to use and look at.",
+  "factorio_version": "1.1",
+  "package": {
+    "ignore": [
+      ".notes", ".graphics", ".mocks", ".git", ".modportal"
+    ]
+  }
+}
