@@ -28,6 +28,8 @@ function gui.open_gui(player)
     else
         global.gui[player].main.visible = true
     end
+
+    playerRef.opened = global.gui[player].main
 end
 
 function gui.close_gui(player)

@@ -1,7 +1,8 @@
 local l = require("logger")
 local b = {}
 
-b.main_name = "FOO-main"
+b.main_name = "foo-main"
+local owner_tag = { owner_mod = "FOOGLE" }
 
 local function build_main_header(main_frame)
     local header = main_frame.add{ type = "flow"}
@@ -19,7 +20,16 @@ local function build_main_header(main_frame)
         style = "foo_draghandle"
     }
     drag_handle.drag_target = main_frame
-
+    header.add{
+        type = "sprite-button",
+        name = "foo_gui_close",
+        style = "frame_action_button",
+        sprite = "utility/close_white",
+        hovered_sprite = "utility/close_black",
+        clicked_sprite = "utility/close_black",
+        mouse_button_filter = {"left"},
+        tags = owner_tag
+    }
 end
 
 local function build_main_content(player, content_frame)
