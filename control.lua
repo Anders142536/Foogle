@@ -54,13 +54,13 @@ end
 local function on_open_gui(event)
     log(l.info("on_open_gui shortcut triggered"))
 
-    gui.openGui(event.player_index)
+    gui.open_gui(event.player_index)
 end
 
 local function on_close_gui(event)
     log(l.info("on_close_gui shortcut triggered"))
 
-    gui.closeGui(event.player_index)
+    gui.close_gui(event.player_index)
 end
 
 

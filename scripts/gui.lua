@@ -1,9 +1,9 @@
 local l = require("logger")
-local guiBuilder = require("guiBuilder")
+local gui_builder = require("guiBuilder")
 
 local gui = {}
 
-local function isValid(player)
+local function is_valid(player)
     return global.gui[player]
         and global.gui[player].main
         and global.gui[player].main.valid
@@ -15,29 +15,35 @@ function gui.initialize(player)
     -- currently unused
 end
 
-function gui.openGui(player)
+function gui.open_gui(player)
     log(l.info("opening gui for player " .. player))
-    if not isValid(player) then
-        -- destroy gui
-        guiBuilder.createGui(player)
-    elseif not global.gui[player].main.visible then
+
+    local playerRef = game.get_player(player)
+    local main = playerRef.gui.screen[gui_builder.main_name]
+
+    if l.doD() then log(l.debug("main exists? " .. (main == nil and "no" or "yes"))) end
+
+    if not main then
+        gui_builder.create_gui(playerRef)
+    else
         global.gui[player].main.visible = true
     end
 end
 
-function gui.closeGui(player)
+function gui.close_gui(player)
     log(l.info("closing gui for player " .. player))
-    if isValid(player) and global.gui[player].main.visible then
+    if is_valid(player) and global.gui[player].main.visible then
+        if l.doD() then log(l.debug("gui was valid and visible")) end
         global.gui[player].main.visible = false
-        gui.clearGui(player)
+        gui.clear_gui(player)
     end
 end
 
-function gui.isOpen(player)
-    return isValid(player) and global.gui[player].main.visible
+function gui.is_open(player)
+    return is_valid(player) and global.gui[player].main.visible
 end
 
-function gui.clearGui(player)
+function gui.clear_gui(player)
     log(l.info("clearing gui for player " .. player))
 end
 

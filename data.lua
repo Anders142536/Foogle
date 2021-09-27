@@ -1,5 +1,5 @@
 --require("prototypes.sprites")
---require("prototypes.styles")
+require("prototypes.styles")
 
 data:extend{
     {
