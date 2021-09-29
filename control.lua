@@ -67,7 +67,7 @@ end
 local handlers = {}
 
 function handlers.gui_close_click(event)
-    
+    gui.close_gui(event.player_index)
 end
 
 -- #endregion gui event handler
@@ -82,7 +82,7 @@ local function callHandler(event, suffix)
     if handlerMethod then
         handlerMethod(event)
 	else
-		log(l.warn("Couldn't find handler method " .. event.element.name .. suffix))
+		log(l.warn("Couldn't find handler method " .. method_name))
     end
 end
 
