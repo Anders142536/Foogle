@@ -32,9 +32,56 @@ local function build_main_header(main_frame)
     }
 end
 
-local function build_main_content(player, content_frame)
+
+-- #region search
+local function build_search_subheader(player, subheader_frame)
 
 end
+
+local function build_search_content(player, content_frame)
+
+end
+
+local function build_search_frame(player, search_frame)
+    build_search_subheader(player, search_frame.add{
+        type = "frame",
+        name = "FOO-search-subheader-frame",
+        style = "foo_subheader"
+    })
+    build_search_content(player, search_frame.add{
+        type = "frame",
+        name = "FOO-search-content-frame",
+        direction = "horizontal"
+    })
+
+end
+
+-- #endregion search
+
+-- #region filter
+local function build_filter_subheader(player, subheader_frame)
+
+end
+
+local function build_filter_content(player, content_frame)
+
+end
+
+local function build_filter_frame(player, filter_frame)
+    build_filter_subheader(player, filter_frame.add{
+        type = "frame",
+        name = "FOO-filter-subheader-frame",
+        style = "foo_subheader"
+    })
+    build_filter_content(player, filter_frame.add{
+        type = "frame",
+        name = "FOO-filter_content_frame",
+        direction = "horizontal"
+    })
+
+end
+
+-- #endregion filter
 
 function b.create_gui(player_ref)
     log(l.info("creating gui for player " .. player_ref.index))
@@ -49,11 +96,23 @@ function b.create_gui(player_ref)
     global.gui[player_ref.index].main = main_frame
 
     build_main_header(main_frame)
-    build_main_content(player_ref.index, main_frame.add{
+    local content_frame = main_frame.add{
+        type = "flow",
+        name = "FOO-main-content-flow",
+        direction = "horizontal"
+       -- style = "window_content_frame_packed"
+    }
+    build_search_frame(player_ref.index, content_frame.add{
         type = "frame",
-        name = "FOO-main-content-frame",
+        name = "FOO-search-frame",
         direction = "vertical",
-        style = "window_content_frame_deep"
+        style = "window_content_frame_packed"
+    })
+    build_filter_frame(player_ref.index, content_frame.add{
+        type = "frame",
+        name = "FOO-filter-frame",
+        direction = "vertical",
+        style = "window_content_frame_packed"
     })
 end
 

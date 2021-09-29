@@ -8,3 +8,8 @@ styles.foo_draghandle = {
     height = 24,
     horizontally_stretchable = "on"
 }
+styles.foo_subheader = {
+    type = "frame_style",
+    parent = "subheader_frame",
+    horizontally_stretchable = "on"
+}
