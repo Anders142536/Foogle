@@ -30,19 +30,126 @@ local function build_main_header(main_frame)
         mouse_button_filter = {"left"},
         tags = owner_tag
     }
+    header.add{
+        type = "sprite-button",
+        name = "foo_settings",
+        style = "frame_action_button",
+        sprite = "utility/close_white",
+        hovered_sprite = "utility/close_black",
+        clicked_sprite = "utility/close_black",
+        mouse_button_filter = {"left"},
+        tags = owner_tag
+    }
 end
 
 
 -- #region search
-local function build_search_subheader(player, subheader_frame)
+local function build_filter_buttons(player, filter_frame)
+    filter_frame.add{
+        type = "sprite-button",
+        name = "FOO-filter-inventories",
+        tooltip = {"FOO-filter-inventories"},
+        style = "foo_toolbar_button",
+        tags = owner_tag
+    }
+    filter_frame.add{
+        type = "sprite-button",
+        name = "FOO-filter-recipes",
+        tooltip = {"FOO-filter-recipes"},
+        style = "foo_toolbar_button",
+        tags = owner_tag
+    }
+    filter_frame.add{
+        type = "sprite-button",
+        name = "FOO-filter-buildings",
+        tooltip = {"FOO-filter-building"},
+        style = "foo_toolbar_button",
+        tags = owner_tag
+    }
+    filter_frame.add{
+        type = "sprite-button",
+        name = "FOO-filter-floor",
+        tooltip = {"FOO-filter-floor"},
+        style = "foo_toolbar_button",
+        tags = owner_tag
+    }
+    filter_frame.add{
+        type = "sprite-button",
+        name = "FOO-filter-CHANGE ME",
+        style = "foo_toolbar_button",
+        tags = owner_tag
+    }
+end
 
+local function build_search_subheader(player, subheader_frame)
+    subheader_frame.add{
+        type = "sprite-button",
+        name = "FOO-recipe-ingredients-button",
+        tooltip = {"FOO-recipe-ingredients-button"},
+        style = "foo_toolbar_button",
+        tags = owner_tag
+    }
+    subheader_frame.add{
+        type = "line",
+        direction = "vertical"
+    }
+    build_filter_buttons(player, subheader_frame.add{
+        type = "flow",
+        direction = "horizontal",
+        style = "foo_filter_flow"
+    })
+    
+    subheader_frame.add{
+        type = "line",
+        direction = "vertical"
+    }
+    subheader_frame.add{
+        type = "sprite-button",
+        name = "FOO-show-search-history",
+        tooltip = {"FOO-show-search-history"},
+        style = "foo_toolbar_button",
+        tags = owner_tag
+    }
+end
+
+local function build_search_table(player, search_item_area)
+    local search_table = search_item_area.add{
+        type = "table",
+        name = "FOO-search-table",
+        column_count= 6,
+        style = "filter_slot_table"
+    }
+
+    search_table.add{
+        type = "sprite-button",
+        style = "slot_button"
+    }
 end
 
 local function build_search_content(player, content_frame)
-
+    local search_item_area = content_frame.add{
+        type = "frame",
+        name = "FOO-search-item-area",
+        direction = "horizontal",
+        style = "slot_button_deep_frame"
+    }
+    search_item_area.style.width = 40 * 6
+    build_search_table(player, search_item_area)
+    content_frame.add{
+        type = "sprite-button",
+        name = "FOO-search-button",
+        tooltip = {"FOO-search-button"},
+        style = "foo_search_button"
+    }
 end
 
-local function build_search_frame(player, search_frame)
+local function build_main_content(player, content_frame)
+    local search_frame = content_frame.add{
+        type = "frame",
+        name = "FOO-search-frame",
+        direction = "vertical",
+        style = "window_content_frame_packed"
+    }
     build_search_subheader(player, search_frame.add{
         type = "frame",
         name = "FOO-search-subheader-frame",
@@ -50,39 +157,14 @@ local function build_search_frame(player, search_frame)
     })
     build_search_content(player, search_frame.add{
         type = "frame",
-        name = "FOO-search-content-frame",
-        direction = "horizontal"
+        name = "FOO-search-content-scroll-pane",
+        direction = "horizontal",
+        style = "foo_frame_under_subheader"
     })
 
 end
 
 -- #endregion search
-
--- #region filter
-local function build_filter_subheader(player, subheader_frame)
-
-end
-
-local function build_filter_content(player, content_frame)
-
-end
-
-local function build_filter_frame(player, filter_frame)
-    build_filter_subheader(player, filter_frame.add{
-        type = "frame",
-        name = "FOO-filter-subheader-frame",
-        style = "foo_subheader"
-    })
-    build_filter_content(player, filter_frame.add{
-        type = "frame",
-        name = "FOO-filter_content_frame",
-        direction = "horizontal"
-    })
-
-end
-
--- #endregion filter
-
 function b.create_gui(player_ref)
     log(l.info("creating gui for player " .. player_ref.index))
 
@@ -96,23 +178,11 @@ function b.create_gui(player_ref)
     global.gui[player_ref.index].main = main_frame
 
     build_main_header(main_frame)
-    local content_frame = main_frame.add{
+    build_main_content(player_ref.index, main_frame.add{
         type = "flow",
         name = "FOO-main-content-flow",
         direction = "horizontal"
-       -- style = "window_content_frame_packed"
-    }
-    build_search_frame(player_ref.index, content_frame.add{
-        type = "frame",
-        name = "FOO-search-frame",
-        direction = "vertical",
-        style = "window_content_frame_packed"
-    })
-    build_filter_frame(player_ref.index, content_frame.add{
-        type = "frame",
-        name = "FOO-filter-frame",
-        direction = "vertical",
-        style = "window_content_frame_packed"
+        -- style = "foo_main_content"
     })
 end
 
