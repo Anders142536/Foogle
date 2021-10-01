@@ -1,4 +1,4 @@
---require("prototypes.sprites")
+require("prototypes.sprites")
 require("prototypes.styles")
 
 data:extend{

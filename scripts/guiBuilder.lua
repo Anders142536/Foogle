@@ -85,6 +85,7 @@ local function build_search_subheader(player, subheader_frame)
     subheader_frame.add{
         type = "sprite-button",
         name = "FOO-recipe-ingredients-button",
+        sprite = "FOO-change-recipe",
         tooltip = {"FOO-recipe-ingredients-button"},
         style = "foo_toolbar_button",
         tags = owner_tag
@@ -138,6 +139,7 @@ local function build_search_content(player, content_frame)
     content_frame.add{
         type = "sprite-button",
         name = "FOO-search-button",
+        sprite = "utility/search_black",
         tooltip = {"FOO-search-button"},
         style = "foo_search_button"
     }
