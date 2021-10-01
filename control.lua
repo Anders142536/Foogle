@@ -22,7 +22,7 @@ local function initialize()
 
     for _, player in pairs(game.connected_players) do
         log(l.info("found player: " .. player.name))
-        initializePlayer(player)
+        initializePlayer(player.index)
     end
 
     log(l.info("initializing end"))
