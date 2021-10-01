@@ -44,10 +44,22 @@ end
 
 
 -- #region search
+local function build_shortcut_buttons(player, subheader_frame)
+    subheader_frame.add{
+        type = "sprite-button",
+        name = "FOO-recipe-ingredients-button",
+        sprite = "FOO-choose-recipe",
+        tooltip = {"FOO-recipe-ingredients-button"},
+        style = "foo_toolbar_button",
+        tags = owner_tag
+    }
+end
+
 local function build_filter_buttons(player, filter_frame)
     filter_frame.add{
         type = "sprite-button",
         name = "FOO-filter-inventories",
+        sprite = "item/steel-chest",
         tooltip = {"FOO-filter-inventories"},
         style = "foo_toolbar_button",
         tags = owner_tag
@@ -55,6 +67,7 @@ local function build_filter_buttons(player, filter_frame)
     filter_frame.add{
         type = "sprite-button",
         name = "FOO-filter-recipes",
+        sprite = "FOO-choose-recipe",
         tooltip = {"FOO-filter-recipes"},
         style = "foo_toolbar_button",
         tags = owner_tag
@@ -62,6 +75,7 @@ local function build_filter_buttons(player, filter_frame)
     filter_frame.add{
         type = "sprite-button",
         name = "FOO-filter-buildings",
+        sprite = "item/assembling-machine-1",
         tooltip = {"FOO-filter-building"},
         style = "foo_toolbar_button",
         tags = owner_tag
@@ -69,41 +83,21 @@ local function build_filter_buttons(player, filter_frame)
     filter_frame.add{
         type = "sprite-button",
         name = "FOO-filter-floor",
+        sprite = "tile/grass-1",
         tooltip = {"FOO-filter-floor"},
         style = "foo_toolbar_button",
         tags = owner_tag
     }
     filter_frame.add{
         type = "sprite-button",
-        name = "FOO-filter-CHANGE ME",
+        name = "FOO-filter-requests",
+        sprite = "item/logistic-chest-requester",
         style = "foo_toolbar_button",
         tags = owner_tag
     }
 end
 
-local function build_search_subheader(player, subheader_frame)
-    subheader_frame.add{
-        type = "sprite-button",
-        name = "FOO-recipe-ingredients-button",
-        sprite = "FOO-change-recipe",
-        tooltip = {"FOO-recipe-ingredients-button"},
-        style = "foo_toolbar_button",
-        tags = owner_tag
-    }
-    subheader_frame.add{
-        type = "line",
-        direction = "vertical"
-    }
-    build_filter_buttons(player, subheader_frame.add{
-        type = "flow",
-        direction = "horizontal",
-        style = "foo_filter_flow"
-    })
-    
-    subheader_frame.add{
-        type = "line",
-        direction = "vertical"
-    }
+local function build_tool_buttons(player, subheader_frame)
     subheader_frame.add{
         type = "sprite-button",
         name = "FOO-show-search-history",
@@ -111,6 +105,25 @@ local function build_search_subheader(player, subheader_frame)
         style = "foo_toolbar_button",
         tags = owner_tag
     }
+end
+
+local function add_vertical_line(subheader_frame)
+    subheader_frame.add{
+        type = "line",
+        direction = "vertical"
+    }
+end
+
+local function build_search_subheader(player, subheader_frame)
+    --build_shortcut_buttons(player, subheader_frame)
+    --add_vertical_line(subheader_frame)
+    build_filter_buttons(player, subheader_frame.add{
+        type = "flow",
+        direction = "horizontal",
+        style = "foo_filter_flow"
+    })
+    --add_vertical_line(subheader_frame)
+    --build_tool_buttons(player, subheader_frame)
 end
 
 local function build_search_table(player, search_item_area)

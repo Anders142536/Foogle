@@ -1,7 +1,7 @@
 data:extend{
     {
         type = "sprite",
-        name = "FOO-change-recipe",
+        name = "FOO-choose-recipe",
         filename = "__core__/graphics/icons/change-recipe.png",
         position = {8, 8},
         size = 48,
